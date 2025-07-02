@@ -7,6 +7,7 @@ EliteHome — это учебное PHP‑приложение для аренд
 - PHP 8 + MySQL 8 (PDO), Google reCAPTCHA v2  
 - Git + GitHub
 
+## Автор: Арина Горшкова 
 ## Структура проекта
 /
 ├── css/ # стили
@@ -27,4 +28,3 @@ cd elite-home-site
 php -S localhost:8000
 
 # 3. Открываем http://localhost:8000/index.html
-Автор: Арина Горшкова 
