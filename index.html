@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Главная — EliteHome</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+  <script defer src="js/slider.js"></script>
+</head>
+<body data-theme="light">
+
+  <!-- Шапка -->
+  <header>
+    <a href="index.html" class="logo">EliteHome</a>
+    <nav>
+      <ul class="main-nav">
+        <li><a href="index.html" class="active">Главная</a></li>
+        <li><a href="objects.html">Каталог объектов</a></li>
+        <li><a href="object-detail.html">Карточка объекта</a></li>
+        <li><a href="personal.php">Личный кабинет</a></li>
+        <?php if (isset($_SESSION['user_id'])): ?>
+  <li><a href="logout.php">Выйти</a></li>
+<?php endif; ?>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li><a href="about.html">О компании</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="admin.php">Админ‑панель</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Переключить тему">🌙</button>
+      <button id="burger" aria-label="Открыть меню" class="burger">☰</button>
+    </nav>
+  </header>
+
+  <!-- Основное содержимое -->
+  <main class="container full-page">
+
+    <!-- Текстовый слайдер -->
+    <section class="hero">
+      <div class="slider" id="hero-slider">
+        <button class="slider-btn prev" aria-label="Назад">‹</button>
+
+        <div class="slides">
+          <!-- Слайд 1 -->
+          <div class="slide slide--blue active"><!-- первый активный -->
+            <div class="slide__content">
+              <h2>Бронируйте онлайн — скидка 5 %</h2>
+              <a href="objects.html" class="slide-btn">Перейти в каталог</a>
+            </div>
+          </div>
+
+          <!-- Слайд 2 -->
+          <div class="slide slide--purple">
+            <div class="slide__content">
+              <h2>150+ премиальных объектов</h2>
+              <p>Москва, Подмосковье, Сочи, Дубай</p>
+            </div>
+          </div>
+
+          <!-- Слайд 3 -->
+          <div class="slide slide--green">
+            <div class="slide__content">
+              <h2>Консультация&nbsp;24/7</h2>
+              <p>Подберём идеальную недвижимость за 1 день</p>
+              <a href="contacts.html" class="slide-btn">Связаться с нами</a>
+            </div>
+          </div>
+        </div>
+
+        <button class="slider-btn next" aria-label="Вперёд">›</button>
+      </div>
+    </section>
+
+    <!-- Блок регистрации / авторизации -->
+    <section class="hero-register">
+      <div class="auth-container">
+
+        <!-- Регистрация -->
+        <div class="auth-card registration">
+          <h2>Регистрация</h2>
+          <!-- ▼ добавлено: action + method -->
+          <form action="register.php" method="post">
+            <label for="reg-name">Имя</label>
+            <!-- ▼ добавлено: name -->
+            <input id="reg-name" name="name" type="text" required>
+
+            <label for="reg-email">Email</label>
+            <!-- ▼ добавлено: name -->
+            <input id="reg-email" name="email" type="email" required>
+
+            <button type="submit" class="btn">Зарегистрироваться</button>
+          </form>
+        </div>
+
+        <!-- Авторизация -->
+        <div class="auth-card login">
+          <h2>Авторизация</h2>
+          <!-- ▼ добавлено: action + method -->
+          <form action="login.php" method="post">
+            <label for="login-email">Email</label>
+            <!-- ▼ добавлено: name -->
+            <input id="login-email"  name="email"    type="email"    required>
+
+            <label for="login-password">Пароль</label>
+            <!-- ▼ добавлено: name -->
+            <input id="login-password" name="password" type="password" required>
+
+            <button type="submit" class="btn">Войти</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Подвал -->
+  <footer class="site-footer">
+    <p>© 2025 EliteHome. Все права защищены.</p>
+    <p>Разработка и дизайн — EliteHome Studio</p>
+  </footer>
+
+</body>
+</html>

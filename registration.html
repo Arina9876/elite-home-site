@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Регистрация / Авторизация — EliteHome</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+</head>
+<body data-theme="light">
+  <header>
+    <a href="index.html" class="logo">EliteHome</a>
+    <nav>
+      <ul class="main-nav">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="registration.html" class="active">Регистрация</a></li>
+        <li><a href="objects.html">Каталог объектов</a></li>
+        <!-- остальные пункты -->
+      </ul>
+      <button id="theme-toggle" aria-label="Переключить тему">🌙</button>
+      <button id="burger" aria-label="Открыть меню" class="burger">☰</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="auth-container full-page">
+      <div class="auth-card registration">
+        <h2>Регистрация</h2>
+        <!-- сюда будут выводиться ошибки -->
+        <ul id="regErrors" style="color:red;"></ul>
+        <form id="regForm" method="post" action="register.php">
+          <label for="reg-name">Имя</label>
+          <input id="reg-name" name="name" type="text" required>
+
+          <label for="reg-email">Email</label>
+          <input id="reg-email" name="email" type="email" required>
+
+          <label for="reg-password">Пароль</label>
+          <input id="reg-password" name="password" type="password" required>
+
+          <label for="reg-password2">Повторите пароль</label>
+          <input id="reg-password2" name="password2" type="password" required>
+<!-- Google reCAPTCHA -->
+<div class="g-recaptcha" data-sitekey="6LcWF2orAAAAAOd6simETe6hXa7SEGYpMR7kPcyS"></div>
+
+<button type="submit" class="btn">Зарегистрироваться</button>
+
+<!-- Подключаем скрипт Google -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+          <button class="btn" type="submit">Зарегистрироваться</button>
+        </form>
+      </div>
+
+      <div class="auth-card login">
+        <h2>Авторизация</h2>
+        <ul id="loginErrors" style="color:red;"></ul>
+        <form id="loginForm" method="post" action="login.php">
+          <label for="login-email">Email</label>
+          <input id="login-email" name="email" type="email" required>
+
+          <label for="login-password">Пароль</label>
+          <input id="login-password" name="password" type="password" required>
+
+          <button class="btn" type="submit">Войти</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 EliteHome. Все права защищены.</p>
+    <p>Разработка и дизайн — EliteHome Studio</p>
+  </footer>
+
+  <script>
+    // Валидация формы регистрации
+    document.getElementById('regForm').addEventListener('submit', function(e) {
+      const errs = [];
+      const name = this.name.value.trim();
+      const email = this.email.value.trim();
+      const pass = this.password.value;
+      const pass2 = this.password2.value;
+
+      if (!name) errs.push('Введите имя.');
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) errs.push('Неверный email.');
+      if (pass.length < 6) errs.push('Пароль должен быть минимум 6 символов.');
+      if (pass !== pass2) errs.push('Пароли не совпадают.');
+
+      const container = document.getElementById('regErrors');
+      container.innerHTML = errs.map(msg => `<li>${msg}</li>`).join('');
+      if (errs.length) e.preventDefault();
+    });
+
+    // Валидация формы входа
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      const errs = [];
+      const email = this.email.value.trim();
+      const pass = this.password.value;
+
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) errs.push('Неверный email.');
+      if (!pass) errs.push('Введите пароль.');
+
+      const container = document.getElementById('loginErrors');
+      container.innerHTML = errs.map(msg => `<li>${msg}</li>`).join('');
+      if (errs.length) e.preventDefault();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<?php
+session_start();
+
+/* доступ только для авторизованных */
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+$userName = $_SESSION['user_name'];            // имя из сессии
+?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Личный кабинет — EliteHome</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+</head>
+<body data-theme="light">
+
+  <!-- Шапка -->
+  <header>
+    <a href="index.html" class="logo">EliteHome</a>
+    <nav>
+      <ul class="main-nav">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="objects.html">Каталог объектов</a></li>
+        <li><a href="object-detail.html">Карточка объекта</a></li>
+        <li><a href="personal.php" class="active">Личный кабинет</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li><a href="about.html">О компании</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="admin.php">Админ‑панель</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Переключить тему">🌙</button>
+      <button id="burger" aria-label="Открыть меню" class="burger">☰</button>
+    </nav>
+  </header>
+
+  <!-- Основное содержимое -->
+  <main>
+    <section id="personal-dashboard" class="personal-dashboard full-page container">
+
+      <!-- Профиль -->
+      <div class="profile-card">
+        <img src="images/idcard.png" alt="Аватар пользователя" class="avatar">
+        <!-- ▼ имя берём из сессии -->
+        <h3><?= htmlspecialchars($userName) ?></h3>
+        <div class="profile-buttons">
+          <button id="show-booking" class="btn">Активные брони</button>
+          <button id="show-settings" class="btn">Настройки</button>
+        </div>
+      </div>
+
+      <!-- Список бронирований -->
+      <div id="booking-container" class="hidden">
+        <h2>Активные брони</h2>
+        <div id="bookings-list" class="bookings-list"></div>
+      </div>
+
+      <!-- Настройки -->
+      <div id="settings-container" class="hidden">
+        <div class="settings-panel">
+          <h3>Настройки аккаунта</h3>
+          <a href="logout.php" class="btn">Выйти из аккаунта</a>
+          <p id="settings-message" class="settings-message"></p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="site-footer">
+    <p>© 2025 EliteHome. Все права защищены.</p>
+    <p>Разработка и дизайн — EliteHome Studio</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Контакты — EliteHome</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+</head>
+<body data-theme="light">
+
+  <!-- Шапка -->
+  <header>
+    <a href="index.html" class="logo">EliteHome</a>
+    <nav>
+      <ul class="main-nav">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="objects.html">Каталог объектов</a></li>
+        <li><a href="object-detail.html">Карточка объекта</a></li>
+        <li><a href="personal.php">Личный кабинет</a></li>
+        <li><a href="contacts.html" class="active">Контакты</a></li>
+        <li><a href="about.html">О компании</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="admin.html">Админ-панель</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Переключить тему">🌙</button>
+      <button id="burger" aria-label="Открыть меню" class="burger">☰</button>
+    </nav>
+  </header>
+
+  <!-- Основное содержимое -->
+  <main>
+    <section id="contacts" class="contacts-list container">
+      <div class="contact-item">
+        <img src="images/location.png" alt="Иконка адреса">
+        <p><strong>Адрес:</strong> Москва, ул. Красная Пресня, д. 2</p>
+      </div>
+      <div class="contact-item">
+        <img src="images/phone.png" alt="Иконка телефона">
+        <p><strong>Телефон:</strong> +7 (495) 123-45-67</p>
+      </div>
+      <div class="contact-item">
+        <img src="images/mail.png" alt="Иконка почты">
+        <p><strong>Email:</strong> info@elitehouses.ru</p>
+      </div>
+      <div class="contact-item">
+        <img src="images/clock.png" alt="Иконка времени работы">
+        <p><strong>Время работы:</strong> Пн–Сб: 10:00–20:00</p>
+      </div>
+      <p class="contacts-note">
+        Мы всегда рады помочь выбрать идеальный дом и воплотить мечту в реальность!
+      </p>
+    </section>
+  </main>
+  ...
+  <!-- здесь заканчиваются ваши существующие секции контактов -->
+
+  <!-- ====== вставляем новый блок «Перезвоните мне» ====== -->
+<!-- ==== ФОРМА «ПЕРЕЗВОНИТЕ МНЕ»  =============================== -->
+<section class="callback container" style="margin-top:3rem">
+  <h2>Оставьте номер — мы свяжемся с вами!</h2>
+
+  <form id="callbackForm" class="callback-form">
+    <label for="cb-name">Ваше имя</label>
+    <input id="cb-name" name="name" type="text" required />
+
+    <label for="cb-phone">Телефон</label>
+    <input id="cb-phone"
+           name="phone"
+           type="tel"
+           placeholder="+7 (___) ___‑__‑__"
+           required />
+
+    <button type="submit" class="btn">Жду звонка</button>
+  </form>
+</section>
+
+<!-- === 1) IMask (попробуем загрузить, но код работает и без неё) === -->
+<script src="https://unpkg.com/imask"></script>
+
+<!-- === 2) JS‑обработчик формы === -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // если IMask загрузился — применяем маску, иначе пропускаем
+  if (window.IMask) {
+      IMask(document.getElementById('cb-phone'),
+            { mask: '+{7}(000)000-00-00' });
+  }
+
+  // отправляем данные через fetch → callback_save.php
+  const form = document.getElementById('callbackForm');
+  form.addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const fd = new FormData(form);
+
+    try {
+      const resp = await fetch('callback_save.php', {
+        method: 'POST',
+        body  : fd
+      });
+      const json = await resp.json();
+      if (json.ok) {
+        alert('Спасибо! Мы перезвоним.');
+        form.reset();
+      } else {
+        alert('Ошибка: ' + json.error);
+      }
+    } catch (e) {
+      alert('Сервер недоступен: ' + e.message);
+    }
+  });
+});
+</script>
+<!-- =============================================================== -->
+  <!-- Подвал -->
+  <footer class="site-footer">
+    <p>© 2025 EliteHome. Все права защищены.</p>
+    <p>Разработка и дизайн — EliteHome Studio</p>
+  </footer>
+
+</body>
+</html>

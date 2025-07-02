@@ -1,0 +1,529 @@
+/* 1. Сброс стилей и box-sizing */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  /* Делает body флекс-контейнером, чтобы футер прижимался вниз */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Основной контент (всегда растягивается) */
+main {
+  flex: 1;
+}
+
+/* Унифицированный стиль футера */
+.site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  text-align: center;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+}
+  
+  /* 2. Переменные тем и базовые цвета */
+  :root {
+    --bg: #ffffff;
+    --text: #111827;
+    --primary: #1f2937;
+    --accent: #BFA56A;
+    --border: #e5e7eb;
+    --header-bg: #1f2937;
+    --header-text: #ffffff;
+    --footer-bg: #1f2937;
+    --footer-text: #ffffff;
+    --font-base: 'Apercu', sans-serif;
+    --font-head: 'WhyteInktrap', sans-serif;
+  }
+  [data-theme='dark'] {
+    --bg: #121212;
+    --text: #eeeeee;
+    --primary: #3399ff;
+    --accent: #BFA56A;
+  }
+  
+  /* 3. Базовая типографика и фон */
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-base);
+    line-height: 1.6;
+  }
+  
+  /* 4. Ссылки и кнопки */
+  a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  /* 5. Шапка */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  header .logo {
+    font-family: var(--font-head);
+    font-size: 1.25rem;
+    color: var(--accent);
+  }
+  .main-nav {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  .main-nav a {
+    color: var(--header-text);
+    padding: 0.5rem;
+  }
+  .main-nav a.active {
+    border-bottom: 2px solid var(--accent);
+  }
+  #theme-toggle {
+    background: none;
+    border: none;
+    color: var(--header-text);
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+  
+  /* 6. Футер */
+  footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: var(--footer-bg);
+    text-align: center;
+    padding: 0.5rem;
+  }
+  .page-indicator {
+    color: var(--footer-text);
+    font-family: var(--font-head);
+  }
+  
+  /* 7. Контейнер фиксированной ширины */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  /* 8. Глобальный full-page для отступов */
+  .full-page {
+    padding: 2rem 0;
+  }
+  
+  /* 9. Формы регистрации/авторизации */
+  .auth-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .auth-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 1.5rem;
+    width: 300px;
+  }
+  .auth-card h2 {
+    font-family: var(--font-head);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .auth-card label {
+    display: block;
+    margin-top: 0.75rem;
+    font-weight: 500;
+  }
+  .auth-card input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  
+  /* 10. Каталог объектов */
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  /* Каталог объектов: выравниваем кнопку внизу карточки */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* растягивает контент, подтягивая кнопку вниз */
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    overflow: hidden;
+  }
+  
+  .card .btn {
+    margin: 1rem;      /* отступ со всех сторон */
+    margin-top: auto;  /* автоматически подтягивает кнопку вниз */
+    align-self: start; /* или end — если нужно справа */
+  }
+  .card h3, .card p { /* если у вас есть описание в каталоге */
+    margin: 1rem;
+  }
+  .card .btn {
+    margin: 1rem;          /* расстояние вокруг кнопки */
+    align-self: flex-start; /* или flex-end, если надо справа */
+  }
+  .card img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid var(--border);
+  }
+  .card h3 {
+    font-family: var(--font-head);
+    font-size: 1.125rem;
+    margin: 1rem;
+  }
+  
+  /* 11. Детальная страница объекта */
+  .detail-img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+  
+  /* 12. Секция бронирования на деталях */
+  #object-detail button.btn {
+    margin-top: 1rem;
+  }
+  
+  /* 13. Список бронирований */
+  .bookings-list {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .booking-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 1rem;
+  }
+  .booking-card h3 {
+    font-family: var(--font-head);
+    margin-bottom: 0.5rem;
+  }
+  .booking-card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+  }
+  
+  /* 14. FAQ */
+  .faq-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .faq-item h3 {
+    font-family: var(--font-head);
+    margin-bottom: 0.5rem;
+  }
+  
+  
+  /* 15. Контакты */
+  .contacts-list .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .contacts-list .contact-item:last-child {
+    border-bottom: none;
+  }
+  .contacts-list .contact-item img {
+    width: 20px;
+    height: 20px;
+  }
+  .contacts-note {
+    margin-top: 1rem;
+    font-style: italic;
+    text-align: center;
+  }
+  
+  /* 16. Личный кабинет */
+  .personal-dashboard {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .profile-card {
+    flex: 0 0 280px;
+    text-align: center;
+  }
+  .profile-card .avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  .profile-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+  .profile-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .current-booking {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 1.5rem;
+  }
+  .current-booking .booking-date {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .current-booking h3 {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-head);
+  }
+  .current-booking p {
+    margin-bottom: 1rem;
+  }
+  .current-booking img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  /* 17. Скрытые блоки и Настройки */
+  .hidden {
+    display: none;
+  }
+  .settings-panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    padding: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .settings-panel h3 {
+    font-family: var(--font-head);
+    margin-bottom: 1rem;
+  }
+  .settings-panel .btn {
+    margin: 0.5rem 0;
+  }
+  .settings-message {
+    margin-top: 1rem;
+    font-style: italic;
+    color: var(--text);
+  }
+  /* Расширенные карточки на object-detail.html */
+#object-list {
+  display: grid;
+  gap: 2rem;
+}
+.detail-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.detail-card h2 {
+  font-family: var(--font-head);
+  margin-bottom: 0.75rem;
+}
+.detail-card p {
+  margin-bottom: 1.25rem;
+}
+.detail-card .detail-img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+}
+.detail-card .book-detail {
+  align-self: flex-end;
+}
+/* Отступ сверху при переходе к якорю (размер = высота header) */
+.detail-card {
+  scroll-margin-top: 80px;
+}
+/* =====================  Мобилки  ===================== */
+@media (max-width: 768px) {
+
+  /* 2.1. Кнопка-бургер видно только на мобилке */
+  .burger {
+    display: block;
+    font-size: 2rem;
+    background: none;
+    border: 0;
+    color: var(--header-text);
+    cursor: pointer;
+  }
+
+  /* 2.2. Горизонтальное меню прячем сбоку */
+  .main-nav {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 70%;
+    height: 100%;
+    flex-direction: column;
+    padding-top: 4rem;
+    gap: 1.5rem;
+    background: var(--header-bg);
+    transition: right .3s ease;
+  }
+
+  /* 2.3. Когда класс .open — меню выезжает */
+  nav.open .main-nav { right: 0; }
+
+  /* 2.4. Логотип и шапка компактнее */
+  header { padding: .5rem 1rem; }
+  .logo  { font-size: 1.25rem; }
+
+  /* 2.5. Каталог в один столбец на очень узких экранах */
+  .catalog-grid { grid-template-columns: 1fr; }
+}
+/* === Slider (общие стили) === */
+.slider            { position: relative; overflow: hidden; }
+.slider .slides    { display: flex; transition: transform .6s ease; }
+.slider-btn        { position: absolute; top:50%; translate:0 -50%;
+                     background:rgba(0,0,0,.4); border:0; color:#fff;
+                     padding:.3rem .6rem; cursor:pointer; font-size:1.5rem; }
+.slider-btn.prev   { left:.5rem;  }
+.slider-btn.next   { right:.5rem; }
+
+/* === Сами «слайды» — у нас это текстовые блоки === */
+.slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;          /* высоту можно менять под дизайн */
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  padding: 1rem;
+  background: var(--accent-bg, #f2f2f2);
+}
+/* --- Slider: базовое --- (у вас уже есть) */
+.slider            { position:relative; overflow:hidden; }
+.slider .slides    { display:flex; transition:transform .6s ease; }
+.slider-btn        { position:absolute; top:50%; translate:0 -50%;
+                     background:rgba(0,0,0,.35); border:0; color:#fff;
+                     padding:.4rem .7rem; font-size:1.6rem; cursor:pointer; }
+.slider-btn.prev   { left:.75rem; }   /* ‹ */
+.slider-btn.next   { right:.75rem; }  /* › */
+
+/* --- Слайды с градиентами --- */
+.slide            { min-width:100%; min-height:60vh; display:flex;
+                    align-items:center; justify-content:center; }
+.slide__content   { text-align:center; color:#fff; max-width:90%; }
+.slide h2         { font-size:clamp(1.8rem,4vw,3rem); margin-bottom:1rem; }
+.slide p          { font-size:1.1rem; margin-bottom:1.5rem; line-height:1.4; }
+.slide-btn        { display:inline-block; padding:.7rem 1.5rem; border-radius:9999px;
+                    background:#fff; color:inherit; font-weight:600; text-decoration:none; }
+
+/* Индивидуальные градиенты */
+.slide--blue    { background:linear-gradient(135deg,#316db2,#0d30ac); }
+.slide--purple  { background:linear-gradient(135deg,#223c70,#181c7e); }
+.slide--green   { background:linear-gradient(135deg,#14124f,#06044d); }
+/* ===== Исправление слайдера – ставим ЖЁСТКИЕ правила  ===== */
+#hero-slider > .slides {
+  display: flex !important;      /* только строка (горизонтально) */
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  transition: transform .6s ease !important;
+}
+
+#hero-slider .slide {
+  flex: 0 0 100% !important;     /* каждый слайд занимает ровно 100% */
+}
+/* ===== Слайдер-переключатель (виден один слайд) ===== */
+#hero-slider .slide        { display:none; }   /* скрыть по-умолчанию   */
+#hero-slider .slide.active { display:flex; }   /* показываем выбранный */
+/* все слайды занимают всю ширину карусели */
+#hero-slider .slide {
+  width: 100%;          /* ← главное! */
+  box-sizing: border-box;
+}
+/* ===== 100 % ширины, 60 % высоты, стопроцентное перекрытие ===== */
+#hero-slider             { position: relative; width: 100vw; height: 60vh; overflow: hidden; }
+#hero-slider .slide      { position: absolute; inset: 0;               /* растянуть на весь блок */
+                           display: none; width: 100%; height: 100%;   /* ровная рамка */
+                           padding: 0 1rem; box-sizing: border-box;
+                           justify-content: center; align-items: center; flex-direction: column; }
+#hero-slider .slide.active { display: flex; }                           /* показываем выбранный */
+
+/* по желанию — минимальная высота для очень маленьких экранов */
+@media (max-height: 540px){
+  #hero-slider           { height: 320px; }
+}
+#hero-slider { position:relative; width:100%; height:60vh; overflow:hidden; }
+/* навигация внутри шапки — в одну линию */
+header nav{
+  display:flex;
+  align-items:center;      /* центрируем по вертикали */
+  gap:1rem;                /* расстояние между меню и кнопками */
+}
+#theme-toggle,
+.burger{
+  display:inline-flex;      /* вместо inline-block */
+  align-items:center;
+  justify-content:center;
+  width:2.25rem;            /* 36 px ─ достаточно под иконку */
+  height:2.25rem;
+  font-size:1.25rem;        /* сама иконка */
+  line-height:1;            /* убираем влияние шрифта */
+}
+footer {
+  color: white;
+  text-align: center;
+  padding: 1em 0;
+}

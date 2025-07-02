@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Каталог объектов — EliteHome</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+</head>
+<body data-theme="light">
+
+  <!-- Шапка -->
+  <header>
+    <a href="index.html" class="logo">EliteHome</a>
+    <nav>
+      <ul class="main-nav">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="objects.html" class="active">Каталог объектов</a></li>
+        <li><a href="object-detail.html">Карточка объекта</a></li>
+        <li><a href="personal.php">Личный кабинет</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+        <li><a href="about.html">О компании</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="admin.html">Админ-панель</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Переключить тему">🌙</button>
+      <button id="burger" aria-label="Открыть меню" class="burger">☰</button>
+    </nav>
+  </header>
+
+  <!-- Основное содержимое -->
+  <main>
+    <section id="catalog" class="catalog-grid full-page container">
+      <article class="card">
+        <img src="images/villa-barvikha.jpg" alt="Особняк в Барвихе">
+        <h3>Особняк в Барвихе</h3>
+        <a href="object-detail.html#villa-barvikha" class="btn">Подробнее</a>
+      </article>
+      <article class="card">
+        <img src="images/cottage-zhukovka.jpg" alt="Коттедж класса люкс в Жуковке">
+        <h3>Коттедж класса люкс в Жуковке</h3>
+        <a href="object-detail.html#cottage-zhukovka" class="btn">Подробнее</a>
+      </article>
+      <article class="card">
+        <img src="images/apartments-country.jpg" alt="Апартаменты за городом">
+        <h3>Апартаменты за городом</h3>
+        <a href="object-detail.html#apartments-country" class="btn">Подробнее</a>
+      </article>
+    </section>
+  </main>
+
+  <!-- Подвал -->
+  <footer class="site-footer">
+    <p>© 2025 EliteHome. Все права защищены.</p>
+    <p>Разработка и дизайн — EliteHome Studio</p>
+  </footer>
+
+</body>
+</html>
